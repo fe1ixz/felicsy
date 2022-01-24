@@ -23,6 +23,7 @@ export class Component {
     }
 
     this._pool = null;
+    this._attachedEntity = null;
   }
 
   copy(source) {
@@ -84,6 +85,14 @@ export class Component {
         );
       }
     });
+  }
+
+  attachToEntity(entity) {
+    this._attachedEntity = entity;
+  }
+
+  getAttachedEntity() {
+    return this._attachedEntity;
   }
 }
 

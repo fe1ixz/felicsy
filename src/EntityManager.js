@@ -1,6 +1,6 @@
+import EventDispatcher from "./EventDispatcher.js";
 import { ObjectPool } from "./ObjectPool.js";
 import QueryManager from "./QueryManager.js";
-import EventDispatcher from "./EventDispatcher.js";
 import { SystemStateComponent } from "./SystemStateComponent.js";
 
 class EntityPool extends ObjectPool {
@@ -124,6 +124,8 @@ export class EntityManager {
       component.copy(values);
     }
 
+    component.attachToEntity(entity);
+
     entity._components[Component._typeId] = component;
 
     this._queryManager.onEntityComponentAdded(entity, Component);
@@ -143,6 +145,8 @@ export class EntityManager {
     if (!~index) return;
 
     this.eventDispatcher.dispatchEvent(COMPONENT_REMOVE, entity, Component);
+
+    entity._components[Component._typeId].attachToEntity(null);
 
     if (immediately) {
       this._entityRemoveComponentSync(entity, Component, index);
