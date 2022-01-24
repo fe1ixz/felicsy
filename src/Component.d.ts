@@ -1,4 +1,5 @@
 import { PropType } from "./Types";
+import { Entity } from "./Entity";
 
 /**
  * Base class for components.
@@ -21,6 +22,7 @@ export class Component<C> {
   clone(): this;
   reset(): void;
   dispose(): void;
+  getAttachedEntity(): Entity;
 }
 
 export interface ComponentConstructor<C extends Component<any>> {
