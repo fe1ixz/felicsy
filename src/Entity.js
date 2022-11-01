@@ -128,7 +128,7 @@ export class Entity {
     for (var ecsyComponentId in src._components) {
       var srcComponent = src._components[ecsyComponentId];
       this.addComponent(srcComponent.constructor);
-      var component = this.getComponent(srcComponent.constructor);
+      var component = this.getMutableComponent(srcComponent.constructor);
       component.copy(srcComponent);
     }
 
