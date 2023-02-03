@@ -1,5 +1,6 @@
 /* global Peer */
-import { injectScript, generateId } from "./utils.js";
+import { generateId, injectScript } from "./utils.js";
+
 import { hasWindow } from "../Utils.js";
 
 function hookConsoleAndErrors(connection) {
@@ -140,7 +141,8 @@ export function enableRemoteDevtools(remoteId) {
 
               hookConsoleAndErrors(connection);
             } else if (data.type === "executeScript") {
-              let value = eval(data.script);
+              var eval2 = eval;
+              let value = eval2(data.script);
               if (data.returnEval) {
                 connection.send({
                   method: "evalReturn",
